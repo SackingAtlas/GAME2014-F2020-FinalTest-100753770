@@ -4,12 +4,15 @@
  * Harrison Black
  * 100753770
  * 
- * Date last modified: Dec.16, 2021
+ * Date last modified: Dec.17, 2021
  * Description: floating platform that shrinks when the player touches it. Then grows back to full size when the player is not touching it.
  * 
+ * Dec.16, 2021
  * 1.shrink and grow functionality 
  * 2.SFX added and code for altering pitch with scale
  * 3.internal documentation added
+ * Dec.17, 2021
+ * 4. made Variables private
  */
 
 using System.Collections;
@@ -20,7 +23,8 @@ public class ShrinkingPlatformScript : MonoBehaviour
 {
     private bool isPlayerOff;
     private Vector3 sizingVector;
-    public float sizingFactor, minimumSize;
+    private float sizingFactor = 0.3f;
+    private float minimumSize = 0.05f;
     public GameObject PlatformCollider;
     private AudioSource speaker;
     private void Start()
