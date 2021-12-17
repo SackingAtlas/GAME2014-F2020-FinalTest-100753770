@@ -13,6 +13,7 @@
  * 3.internal documentation added
  * Dec.17, 2021
  * 4. made Variables private
+ * 5. added player check to ontriggerenter
  */
 
 using System.Collections;
@@ -50,7 +51,8 @@ public class ShrinkingPlatformScript : MonoBehaviour
     //checking for player collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        speaker.Play(); // when the player touches the platform start the sound fx
+        if (collision.gameObject.tag == "Player")
+            speaker.Play(); // when the player touches the platform start the sound fx
     }
 
     //checking if player is still touching
