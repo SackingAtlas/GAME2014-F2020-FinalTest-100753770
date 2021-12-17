@@ -8,16 +8,28 @@ public class ShrinkingPlatformScript : MonoBehaviour
     private Vector3 shrinkVector;
     public float shrinkFactor, minSize;
     public GameObject tile;
+    private AudioSource speaker;
     private void Start()
     {
         shrinkVector = new Vector3(shrinkFactor, 0, 0);
+        speaker = GetComponent<AudioSource>();
     }
     private void Update()
     {
+        speaker.pitch = transform.localScale.x;
         if (off && transform.localScale.x < 1)
         {
             transform.localScale += shrinkVector * Time.deltaTime;
         }
+        if (transform.localScale.x > 1)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            speaker.Stop();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        speaker.Play();
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -27,7 +39,6 @@ public class ShrinkingPlatformScript : MonoBehaviour
             if (transform.localScale.x > minSize)
             {
                 transform.localScale -= shrinkVector * Time.deltaTime;
-                Debug.Log("onand shrink");
             }
             if (transform.localScale.x < minSize)
             {
